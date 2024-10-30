@@ -6,12 +6,20 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:50:22 by julcalde          #+#    #+#             */
-/*   Updated: 2024/10/30 13:59:40 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:26:27 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+/*
+	You will compile your code as follows (a buffer size of 42 is used as an
+	example):
+	cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c
+*/
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 # include <stdlib.h>
 

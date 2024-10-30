@@ -6,7 +6,15 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:58:22 by julcalde          #+#    #+#             */
-/*   Updated: 2024/10/30 13:58:49 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:12:26 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+/* Read function prototype
+read(int fd, char buffer[], int bytes);
+fd:		file descriptor.
+buffer:	array where to stock the read chars.
+bytes:	number of bytes to read per iteration.
+*/
