@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:50:22 by julcalde          #+#    #+#             */
-/*   Updated: 2024/10/30 15:46:17 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/03 15:28:23 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,9 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# include <stdlib.h>
-# include <stdlib.h>
 # include <fcntl.h>
-
-typedef struct s_list
-{
-	char			*line;
-	struct s_list	*next;
-}					t_list;
-
+# include <stdlib.h>
+# include <unistd.h>
 
 char	*get_next_line(int fd);
 

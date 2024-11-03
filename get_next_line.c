@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/10/30 15:42:19 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/03 15:28:58 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,5 @@ NOTE:	Add all the helper functions you need in the get_next_line_utils.c file
 
 char	*get_next_line(int fd)
 {
-	char			*read_line;
-	static t_list	*list;
-
-	list = NULL;
-	if (fd < 0 || BUFFER_SIZE < 1 ||)
-	{
-		
-	}
-	read_line = "asdasd";
-	return (read_line);
+	return (NULL);
 }
