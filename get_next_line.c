@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/06 16:29:29 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:16:30 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,23 @@ bytes:	number of bytes to read per iteration.
 char	*get_next_line(int fd)
 {
 	char		*text_storage;
-	static char	*read_chunk;
+	static char	read_chunk[BUFFER_SIZE + 1];
 	char		*tmp_buff;
 	int			i;
 
-	read_chunk = read(fd, tmp_buff, BUFFER_SIZE);
-	if (fd < 0 || BUFFER_SIZE < 1 || read_chunk < 0)
-		return (free(read_chunk), NULL);
-	text_storage = NULL;
-	ft_append_line(read_chunk, text_storage);
+	// ft_strchr
+
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
+		return (NULL);
+ 	while (ft_strchr(blabla) || i <= 0) // check if there is a \n or read reads 0 bytes
+	{
+		i = read(fd, tmp_buff, BUFFER_SIZE);
+		// append read buffer to return line
+		text_storage = NULL;
+		ft_append_line(tmp_buff, text_storage);
+	}
+	// cut the returning line to be only until the \n character 
+	// store all following characters in the buffer 
 	return (NULL);
 }
 
