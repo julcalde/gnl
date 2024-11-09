@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:58:22 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/06 15:43:18 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:05:47 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,54 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strcpy(char *dst, char *src)
 {
-	char	*s3;
-	size_t	s1_len;
-	size_t	s2_len;
-	size_t	c1;
-	size_t	c2;
+	int	i;
 
-	c1 = 0;
-	c2 = 0;
-	if (!s1 || !s2)
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_strncpy(char *dst, char *src, unsigned int n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while ((src[i] != '\0') && (i < n))
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < n)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*dupe;
+	int		c;
+	size_t	i;
+
+	c = 0;
+	i = ft_strlen(s1);
+	dupe = ft_calloc(i + 1, sizeof(char));
+	if (dupe == NULL)
 		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	s3 = (char *) malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (!s3)
-		return (NULL);
-	while (s1[c1])
-		s3[c2++] = s1[c1++];
-	c1 = 0;
-	while (s2[c1])
-		s3[c2++] = s2[c1++];
-	s3[c2] = '\0';
-	return (s3);
+	while (s1[c] != '\0')
+	{
+		dupe[c] = s1[c];
+		c++;
+	}
+	dupe[c] = '\0';
+	return (dupe);
 }
