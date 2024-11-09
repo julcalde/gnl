@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:58:22 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/09 17:05:47 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:36:58 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,17 @@ char	*ft_strncpy(char *dst, char *src, unsigned int n)
 char	*ft_strdup(const char *s1)
 {
 	char	*dupe;
-	int		c;
 	size_t	i;
 
-	c = 0;
-	i = ft_strlen(s1);
-	dupe = ft_calloc(i + 1, sizeof(char));
-	if (dupe == NULL)
+	dupe = (char *)malloc(ft_strlen(s1) + 1);
+	if (!dupe)
 		return (NULL);
-	while (s1[c] != '\0')
+	i = 0;
+	while (s1[i])
 	{
-		dupe[c] = s1[c];
-		c++;
+		dupe[i] = s1[i];
+		i++;
 	}
-	dupe[c] = '\0';
+	dupe[i] = '\0';
 	return (dupe);
 }

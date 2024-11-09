@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/09 18:16:10 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:47:34 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ char	*get_next_line(int fd)
 {
 	static char	*text_storage;
 	char		*line;
-	char		*tmp_buffer[BUFFER_SIZE + 1];
+	char		tmp_buffer[BUFFER_SIZE + 1];
 	int			read_chunk;
 
-	if (!tmp_buffer)
-		return (NULL);
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -51,7 +49,7 @@ char	*get_next_line(int fd)
 		if (read_chunk < 0)
 			break ;
 		tmp_buffer[read_chunk] = '\0';
-		line = line_storage(line, tmp_buffer);
+		line = line_storage(line, (char *)tmp_buffer);
 		if (ft_strchr(line, '\n') || read_chunk == 0)
 		{
 			text_storage = ex_sa_rest(&line);
@@ -113,7 +111,8 @@ char	*ex_sa_rest(char **line)
 	char	*new_storage;
 	char	*rest;
 
-	new_storage = extract_newline(*line, &length);
+	length = 0;
+	new_storage = extract_newline(*line, length);
 	if (!new_storage)
 		return (NULL);
 	if (ft_strchr(*line, '\n'))
