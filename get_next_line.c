@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/10 16:10:22 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:52:39 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ buffer:	array where to stock the read chars.
 bytes:	number of bytes to read per iteration.
 */
 
-char	*line_storage(char *line, char *tmp_buffer);
-char	*extract_newline(char *line);
-char	*ex_sa_rest(char **line);
+static char	*line_storage(char *line, char *tmp_buffer);
+static char	*extract_newline(char *line);
+static char	*ex_sa_rest(char **line);
 
 char	*get_next_line(int fd)
 {
@@ -48,7 +48,7 @@ char	*get_next_line(int fd)
 	{
 		read_chunk = read(fd, tmp_buffer, BUFFER_SIZE);
 		if (read_chunk < 0)
-			return (free(tmp_buffer), NULL);
+			return (free(tmp_buffer), line = NULL, NULL);
 		tmp_buffer[read_chunk] = '\0';
 		line = line_storage(line, tmp_buffer);
 		if (!line)
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 }
 
 // Appends tmp_buffer content to line, handling memory reallocation
-char	*line_storage(char	*line, char	*tmp_buffer)
+static char	*line_storage(char	*line, char	*tmp_buffer)
 {
 	char	*new_line;
 	size_t	line_len;
@@ -84,7 +84,7 @@ char	*line_storage(char	*line, char	*tmp_buffer)
 }
 
 // Function t extract the '\n' in the 'ex_sa_rest' function
-char	*extract_newline(char *line)
+static char	*extract_newline(char *line)
 {
 	char	*newline_loc;
 	size_t	get_to_newline;
@@ -104,7 +104,7 @@ char	*extract_newline(char *line)
 }
 
 // Extracts the current line up to the '\n', saves the leftover data
-char	*ex_sa_rest(char **line)
+static char	*ex_sa_rest(char **line)
 {
 	char	*new_storage;
 	char	*rest;
