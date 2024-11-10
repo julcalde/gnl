@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:58:22 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/09 18:36:58 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:46:14 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ char	*ft_strdup(const char *s1)
 	char	*dupe;
 	size_t	i;
 
+	if (!s1)
+		return (NULL);
 	dupe = (char *)malloc(ft_strlen(s1) + 1);
 	if (!dupe)
 		return (NULL);

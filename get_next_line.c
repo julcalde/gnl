@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/09 18:47:34 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:35:56 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ bytes:	number of bytes to read per iteration.
 */
 
 char	*line_storage(char *line, char *tmp_buffer);
-char	*extract_newline(char *line, size_t length);
+char	*extract_newline(char *line);
 char	*ex_sa_rest(char **line);
 
 char	*get_next_line(int fd)
 {
-	static char	*text_storage;
-	char		*line;
+	static char	*line;
 	char		tmp_buffer[BUFFER_SIZE + 1];
 	int			read_chunk;
 
@@ -47,17 +46,15 @@ char	*get_next_line(int fd)
 	{
 		read_chunk = read(fd, tmp_buffer, BUFFER_SIZE);
 		if (read_chunk < 0)
-			break ;
+			return (NULL);
 		tmp_buffer[read_chunk] = '\0';
-		line = line_storage(line, (char *)tmp_buffer);
+		line = line_storage(line, tmp_buffer);
+		if (!line)
+			return (NULL);
 		if (ft_strchr(line, '\n') || read_chunk == 0)
-		{
-			text_storage = ex_sa_rest(&line);
 			break ;
-		}
 	}
-	free(tmp_buffer);
-	return (text_storage);
+	return (ex_sa_rest(&line));
 }
 
 // Appends tmp_buffer content to line, handling memory reallocation
@@ -68,9 +65,9 @@ char	*line_storage(char	*line, char	*tmp_buffer)
 	size_t	buff_len;
 
 	line_len = 0;
+	buff_len = ft_strlen(tmp_buffer);
 	if (line)
 		line_len = ft_strlen(line);
-	buff_len = ft_strlen(tmp_buffer);
 	new_line = malloc((line_len + buff_len + 1));
 	if (!new_line)
 		return (NULL);
@@ -84,7 +81,7 @@ char	*line_storage(char	*line, char	*tmp_buffer)
 }
 
 // Function t extract the '\n' in the 'ex_sa_rest' function
-char	*extract_newline(char *line, size_t length)
+char	*extract_newline(char *line)
 {
 	char	*newline_loc;
 	size_t	get_to_newline;
@@ -100,24 +97,21 @@ char	*extract_newline(char *line, size_t length)
 		return (NULL);
 	ft_strncpy(new_storage, line, get_to_newline);
 	new_storage[get_to_newline] = '\0';
-	length = get_to_newline;
 	return (new_storage);
 }
 
 // Extracts the current line up to the '\n', saves the leftover data
 char	*ex_sa_rest(char **line)
 {
-	size_t	length;
 	char	*new_storage;
 	char	*rest;
 
-	length = 0;
-	new_storage = extract_newline(*line, length);
+	new_storage = extract_newline(*line);
 	if (!new_storage)
 		return (NULL);
 	if (ft_strchr(*line, '\n'))
 	{
-		rest = ft_strdup(*line + length);
+		rest = ft_strdup(*line + ft_strlen(new_storage));
 		free(*line);
 		*line = rest;
 	}
