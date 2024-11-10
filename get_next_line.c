@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/09 19:35:56 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/10 16:10:22 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,27 @@ char	*ex_sa_rest(char **line);
 char	*get_next_line(int fd)
 {
 	static char	*line;
-	char		tmp_buffer[BUFFER_SIZE + 1];
+	char		*tmp_buffer;
 	int			read_chunk;
 
-	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	tmp_buffer = (char *)malloc(BUFFER_SIZE + 1);
+	if (!tmp_buffer)
 		return (NULL);
 	while (1)
 	{
 		read_chunk = read(fd, tmp_buffer, BUFFER_SIZE);
 		if (read_chunk < 0)
-			return (NULL);
+			return (free(tmp_buffer), NULL);
 		tmp_buffer[read_chunk] = '\0';
 		line = line_storage(line, tmp_buffer);
 		if (!line)
-			return (NULL);
+			return (free(tmp_buffer), NULL);
 		if (ft_strchr(line, '\n') || read_chunk == 0)
 			break ;
 	}
+	free(tmp_buffer);
 	return (ex_sa_rest(&line));
 }
 
