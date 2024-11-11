@@ -6,11 +6,12 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/11 14:18:34 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:07:20 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 /* Goal
 DESC:	Write a function that returns a line read from a
@@ -48,7 +49,7 @@ char	*get_next_line(int fd)
 	{
 		read_chunk = read(fd, tmp_buffer, BUFFER_SIZE);
 		if (read_chunk < 0)
-			return (free(tmp_buffer), line);
+			return (free(tmp_buffer), free(line), line = NULL, line);
 		tmp_buffer[read_chunk] = '\0';
 		line = line_storage(line, tmp_buffer);
 		if (!line)
@@ -127,3 +128,10 @@ static char	*ex_sa_rest(char **line)
 	}
 	return (new_storage);
 }
+
+// int	main(void)
+// {
+//  	int fd = open("text.txt", O_RDONLY);
+// 	printf("%s", get_next_line(fd));
+// 	return (0);
+// }
