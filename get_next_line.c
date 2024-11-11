@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/11 15:07:20 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:46:25 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,23 @@ static char	*ex_sa_rest(char **line);
 char	*get_next_line(int fd)
 {
 	static char	*line = NULL;
-	char		*tmp_buffer;
+	char		tmp_buffer[BUFFER_SIZE + 1];
 	int			read_chunk;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	tmp_buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!tmp_buffer)
 		return (NULL);
 	while (1)
 	{
 		read_chunk = read(fd, tmp_buffer, BUFFER_SIZE);
 		if (read_chunk < 0)
-			return (free(tmp_buffer), free(line), line = NULL, line);
+			return (free(line), line = NULL, line);
 		tmp_buffer[read_chunk] = '\0';
 		line = line_storage(line, tmp_buffer);
 		if (!line)
-			return (free(tmp_buffer), NULL);
+			return (NULL);
 		if (ft_strchr(line, '\n') || read_chunk == 0)
 			break ;
 	}
-	free(tmp_buffer);
 	return (ex_sa_rest(&line));
 }
 
@@ -132,6 +128,6 @@ static char	*ex_sa_rest(char **line)
 // int	main(void)
 // {
 //  	int fd = open("text.txt", O_RDONLY);
-// 	printf("%s", get_next_line(fd));
-// 	return (0);
+// 		printf("%s", get_next_line(fd));
+// 		return (0);
 // }
