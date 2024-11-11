@@ -6,7 +6,7 @@
 /*   By: julcalde <julcalde@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:48:58 by julcalde          #+#    #+#             */
-/*   Updated: 2024/11/10 19:52:39 by julcalde         ###   ########.fr       */
+/*   Updated: 2024/11/11 10:38:20 by julcalde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,3 +125,4 @@ static char	*ex_sa_rest(char **line)
 	}
 	return (new_storage);
 }
+
